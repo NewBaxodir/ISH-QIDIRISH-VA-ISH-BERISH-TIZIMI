@@ -1,0 +1,151 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block menu %} 
+<!-- header -->
+<header class="" style="border-radius: 0px; font-family: 'Baloo Chettan 2';">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm p-3 bg-body rounded-start">
+    <div class="container-fluid col-lg-11 ms-auto">
+      
+    <a class="navbar-brand landing-brand" href="{% url 'account' %}" style="font-weight: bold; font-size: 20px; color: rgb(0, 74, 150);">
+    <!-- <i class="fas fa-key" style="font-weight: bold;"></i> -->
+      master<font style="color: rgb(243,147,0);">UZ</font>.uz </a>
+      
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+
+   <!-- **************************** -->
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+  <ul class="navbar-nav">
+  <li class="nav-item">
+  <a class="nav-link active" href="{% url 'summary' %}">Mening tarjimai holim</a>
+  </li>
+  </ul>
+  </div>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ms-auto mx-2">
+      <li class="nav-item">
+      <a class="nav-link" href="#">Menu</a>
+      </li>
+      <li class="nav-item">
+      <a class="nav-link" href="#"><i class="fas fa-user-circle account_logatip"></i></a>
+      </li>
+      <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+      {{request.user.last_name}} {{request.user.first_name}}
+      </a>
+      <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+      <li><a class="dropdown-item" href="{% url 'account_info' %}">Hisob sozlamalari</a></li>
+      <li><a class="dropdown-item" href="{% url 'logout' %}">Chiqish</a></li>
+      </ul>
+      </li>
+      </ul>
+    </div>
+
+    
+  </div>
+  </nav>
+</header>
+<!-- header -->
+{% endblock %}
+
+
+
+{% block content %}
+
+<div class="container-fluid">
+  <div class="container"> 
+  <div class="row">
+
+  <div class="col-lg-12 mt-5">
+  <a href="{% url 'summary_create' %}" style="text-decoration: none;">
+  <button type="button" class="btn btn-primary btn-sm rounded-0">Tarjimai hol yaratish</button>
+  </a>
+  <button type="button" class="btn btn-primary btn-sm rounded-0">Buyrutma berish tarjimai hol</button>
+  
+  <h5 class="mt-4">Mening Tarjimai holllarim</h5>
+  <hr>
+  </div>
+
+
+
+<!-- ↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕ -->
+{% for s in summ %}
+  <div class="col-lg-12 mt-2">
+  <div class="border p-3">
+
+  <div class="row">
+
+
+
+    <!-- **************************** -->
+    <div class="col-lg-10" style="border: 1px solid red;">
+    <div>
+      {{s.id}}.{{s.title}}
+    </div>
+
+    <div>
+      <small>{{s.title1}}</small>
+    </div>
+    <div>
+      <span class="ms-2">{{s.last_name}}</span>
+      <span>{{s.first_name}}</span>
+    </div>
+
+    <div>
+      <span class="ms-2">{{s.phone_name}}</span>
+    </div>
+
+      {{s.provinces}}
+      {{s.region}}
+      <div>
+      {{s.title2}}
+      </div>
+      {{s.data_time}}
+      {{s.sex}}
+      {{s.citizenship}}
+      {{s.workexper}}
+      {{s.thesalary}}
+      {{s.moneys}}
+      {{s.speciali}}
+      {{s.profess}}
+      {{s.thchopr}}
+
+
+
+    <div>
+      <small>{{s.title}}ning yaratilgan vaqti {{s.pub_date|date:"j"}} - {{s.pub_date|date:"F"}} {{s.pub_date|date:"Y"}}</small>
+    </div>
+    
+    </div>
+    <!-- ****************************** -->
+
+
+
+    <!-- ********************************* -->
+    <div class="col-lg-2" style="border: 1px solid red;">
+      dvsd
+    </div>
+    <!-- ******************************** -->
+    
+  </div>
+
+
+
+
+
+  </div>
+  </div>
+{% endfor %}
+
+<!-- ↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕ -->
+
+
+  </div>
+  </div>
+</div>
+
+{% endblock %}

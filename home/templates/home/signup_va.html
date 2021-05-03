@@ -1,0 +1,193 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}
+<title>Bosh sahifa</title> 
+{% endblock %}
+
+{% block link %} 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+{% endblock %}
+
+{% block content %}
+
+<style type="text/css">
+  .field-icon {
+  float: right;
+  margin-left: -25px;
+  margin-top: -32px;
+  position: relative;
+  z-index: 2;
+}
+
+.field-icon2 {
+  float: right;
+  margin-left: -25px;
+  margin-top: -27px;
+  position: relative;
+  z-index: 2;
+
+}   
+</style>
+
+
+<main>
+<div class="container">
+<div class="col-lg-12 m-auto mt-5 mb-4">
+
+<form method="post" action="{% url 'signup_va' %}" id="personForm" data-cities-url="{% url 'ajax_load_cities' %}">{% csrf_token %}
+<div class="card m-auto shadow-sm col-lg-4">
+<div class="card-body">
+<h5 class="card-title">Создать новый аккаунт</h5>
+
+
+<div class="mb-3 col-lg-12">
+<label><small>Фамилия</small></label>
+{{form.last_name}} {{form.last_name.errors}} 
+</div>
+
+<div class="mb-3 col-lg-12">
+<label><small>Имя</small></label>
+{{form.first_name}} {{form.first_name.errors}} 
+</div>
+
+<div class="mb-3 col-lg-12">
+<label><small>Номер телефона</small></label>
+{{form.phone_numer}} {{form.phone_numer.errors}} 
+</div> 
+
+<div class="mb-3 col-lg-12">
+<label><small>Электронная почта</small></label>
+{{form.email}}  {{form.email.errors}} 
+</div>
+
+
+<div class="mb-3 col-lg-12">
+<label><small>Названия компании</small></label>
+{{form.name_company}} {{form.name_company.errors}} 
+</div>
+
+
+<div class="mb-3 col-lg-12">
+<label><small>Выберите область</small></label>
+{{form.provinces}} {{form.provinces.errors}} 
+</div>
+
+
+<div class="mb-3 col-lg-12">
+<label><small>Выберите район или город</small></label>
+{{form.region}} {{form.region.errors}} 
+</div>
+
+
+<div class="mb-3 col-lg-12">
+<label><small>Выберите</small></label>
+{{form.choose}} {{form.choose.errors}} 
+</div>
+
+
+<div class="mb-3 col-lg-12">
+<label><small>Логин</small></label>
+{{form.username}}  {{form.username.errors}} 
+</div>
+
+
+<div class="mb-3 col-lg-12">
+<label><small>Пароль (мин 5 символов)</small></label>
+{{form.password1}}
+<i id="eyebaxodir" class="fas fa-eye field-icon" onclick="Baxodir1()"></i>
+{{form.password1.errors}} 
+</div>
+
+<div class="mb-3 col-lg-12">
+<label><small>Повтор пароля</small></label>
+{{form.password2}}
+<i id="eyebaxodir2" class="fas fa-eye field-icon2" onclick="Baxodir2()"></i>
+{{form.password2.errors}} 
+</div>
+
+
+<button type="submit" class="btn btn-primary rounded-1">Подтвердить</button>
+<a href="{% url 'signin_va' %}" style="text-decoration: none;">
+<button type="button" class="btn outline-primary btn-sm" style="color: blue;">Логин</button>
+</a>
+
+</div>
+</div>
+</form>
+
+</div>
+
+
+</div>
+</main>
+
+
+{% endblock %}
+
+
+{% block javascript %}
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+    $("#id_provinces").change(function () {
+        const url = $("#personForm").attr("data-cities-url");  // get the url of the `load_cities` view
+        const countryId = $(this).val();  // get the selected country ID from the HTML input
+
+        $.ajax({                       // initialize an AJAX request
+            url: url,                    // set the url of the request (= /persons/ajax/load-cities/ )
+            data: {
+                'user_id': countryId       // add the country id to the GET parameters
+            },
+            success: function (data) {   // `data` is the return of the `load_cities` view function
+                $("#id_region").html(data);  // replace the contents of the city input with the data that came from the server
+                /*
+
+                let html_data = '<option value="">---------</option>';
+                data.forEach(function (city) {
+                    html_data += `<option value="${city.id}">${city.name}</option>`
+                });
+                console.log(html_data);
+                $("#id_city").html(html_data);
+
+                */
+            }
+        });
+
+    });
+</script>
+
+
+
+
+<script>
+
+function Baxodir1() {
+  
+  var p1 = document.getElementById("id_password1");
+  if (p1.type === "password") {
+    $('#eyebaxodir').toggleClass("fas fa-eye-slash");
+    p1.type = "text";
+  } else {
+    p1.type = "password";
+    $('#eyebaxodir').toggleClass("fas fa-eye");
+  }
+}
+
+
+function Baxodir2() {
+  
+  var p2 = document.getElementById("id_password2");
+  if (p2.type === "password") {
+    $('#eyebaxodir2').toggleClass("fas fa-eye-slash");
+    p2.type = "text";
+  } else {
+    p2.type = "password";
+    $('#eyebaxodir2').toggleClass("fas fa-eye");
+  }
+}
+
+</script>
+
+
+{% endblock %}

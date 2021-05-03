@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}
+<title>Bosh sahifa</title> 
+{% endblock %}
+
+{% block link %} 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+{% endblock %}
+
+
+
+{% block content %}
+<style type="text/css">
+	  .field-icon {
+  float: right;
+  margin-left: -25px;
+  margin-top: -28px;
+  position: relative;
+  z-index: 2;
+}
+</style>
+
+
+<main>
+<div class="container">
+<div class="col-lg-12 m-auto mt-5">
+
+<form method="post" action="">{% csrf_token %}
+<div class="card m-auto shadow-sm col-lg-4">
+<div class="card-body">
+<h5 class="card-title">Поиск сотрудников</h5>
+
+
+<div class="mb-3 col-lg-8">
+<label><small>Логин</small></label>
+<input type="text" name="username" autocomplete="username" placeholder="Логин" class="form-control rounded-1">
+</div>
+
+
+<div class="mb-3 col-lg-8">
+<label><small>Пароль</small></label>
+<input type="password" name="password" autocomplete="password" placeholder="Пароль" class="form-control rounded-1" id="inputPassword">
+<i id="eyebaxodir2" class="fas fa-eye field-icon" onclick="Baxodirlp()"></i>
+</div>
+{% for message in messages %}
+<p align="left" style="color: red; font-size: 16px;">{{message}}</p>
+{% endfor %}
+
+
+<button type="submit" class="btn btn-primary rounded-1">Войти</button>
+<a href="{% url 'signup_va' %}" style="text-decoration: none;">
+<button type="button" class="btn outline-primary btn-sm" style="color: blue;">Регистрация</button>
+</a>
+<a href="{% url 'password_reset' %}">
+<button type="button" class="btn outline-primary btn-sm" style="color: blue;">Восстановить пароль</button>
+</a>
+
+</div>
+</div>
+</form>
+
+</div>
+
+
+
+
+<!-- ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ -->
+<!-- ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ -->
+<div class="col-lg-12 m-auto mt-4 mb-4">
+<div class="card m-auto shadow-sm col-lg-4">
+<div class="card-body">
+<h5 class="card-title">Поиск работы</h5>
+<p class="card-text"><small>Публикация резюме и поиск по вакансиям</small></p>
+<a href="{% url 'signin_su' %}" style="text-decoration: none;">
+  <button type="button" class="btn btn-outline-primary btn-sm ">Я ищу работу</button>
+  </a>
+
+
+</div>
+</div>
+</div>
+<!-- ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ -->
+<!-- ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ -->
+
+
+</div>
+</main>
+
+
+
+<script>
+function Baxodirlp() {
+  var p2 = document.getElementById("inputPassword");
+  if (p2.type === "password") {
+    $('#eyebaxodir2').toggleClass("fas fa-eye-slash");
+    p2.type = "text";
+  } else {
+    p2.type = "password";
+    $('#eyebaxodir2').toggleClass("fas fa-eye");
+  }
+}
+
+</script>
+{% endblock %}

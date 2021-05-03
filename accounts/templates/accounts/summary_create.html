@@ -1,0 +1,541 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block link %} 
+<!-- <script src="{% static 'js/jquery-3.1.1.min.js' %}"></script> -->
+<script src="{% static 'js/jquery.js' %}"></script>
+
+{% endblock %}
+
+
+{% block menu %} 
+<!-- header -->
+<header class="" style="border-radius: 0px; font-family: 'Baloo Chettan 2';">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm p-3 bg-body rounded-start">
+    <div class="container-fluid col-lg-11 ms-auto">
+      
+    <a class="navbar-brand landing-brand" href="{% url 'account' %}" style="font-weight: bold; font-size: 20px; color: rgb(0, 74, 150);">
+    <!-- <i class="fas fa-key" style="font-weight: bold;"></i> -->
+      master<font style="color: rgb(243,147,0);">UZ</font>.uz </a>
+      
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+
+   <!-- **************************** -->
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+  <ul class="navbar-nav">
+  <li class="nav-item">
+  <a class="nav-link active" href="{% url 'summary' %}">Mening tarjimai holim</a>
+  </li>
+  </ul>
+  </div>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ms-auto mx-2">
+      <li class="nav-item">
+      <a class="nav-link" href="#">Menu</a>
+      </li>
+      <li class="nav-item">
+      <a class="nav-link" href="#"><i class="fas fa-user-circle account_logatip"></i></a>
+      </li>
+      <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+      {{request.user.last_name}} {{request.user.first_name}}
+      </a>
+      <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+      <li><a class="dropdown-item" href="{% url 'account_info' %}">Hisob sozlamalari</a></li>
+      <li><a class="dropdown-item" href="{% url 'logout' %}">Chiqish</a></li>
+      </ul>
+      </li>
+      </ul>
+    </div>
+
+    
+  </div>
+  </nav>
+</header>
+<!-- header -->
+{% endblock %}
+
+
+
+{% block content %}
+
+<div class="container-fluid">
+  <div class="container"> 
+  <div class="row">
+
+  <div class="col-lg-12 mt-5">
+  <h5 class="mb-4">Sizning tarjimai holingiz</h5>
+  
+  <a href="{% url 'summary_create' %}" style="text-decoration: none;">
+  <button type="button" class="btn btn-primary btn-sm rounded-0">Tarjimai holingizni yuklang</button>
+  </a>
+  <button type="button" class="btn btn-primary btn-sm rounded-0">Buyrutma berish tarjimai hol</button>
+ 
+  </div>
+
+
+
+
+  <form method="post" action="{% url 'summary_create' %}">{% csrf_token %}
+  <div class="col-lg-12 mt-5">
+  <h6 class="mb-4">Aloqa ma'lumotlarini</h6>
+  
+
+<!-- ↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕ -->
+
+  <div class="mb-3 row">
+  <label for="staticEmail" class="col-sm-2 col-form-label"><small>Familya</small></label>
+  <div class="col-lg-4">
+  {{form.last_name}}
+  </div>
+  </div>
+<!-- ↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕ -->
+
+
+
+
+<!-- ↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕ -->  
+  <div class="mb-5 row">
+  <label for="inputPassword" class="col-sm-2 col-form-label"><small>Ism</small></label>
+  <div class="col-sm-4">
+  {{form.first_name}}
+  </div>
+  </div>
+<!-- ↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕ -->
+
+
+
+<!-- ↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕ -->
+  <div class="mb-5 row">
+  <label for="inputPassword" class="col-sm-2 col-form-label"><small>Telefon nomer</small></label>
+  <div class="col-sm-4">
+  {{form.phone_name}}
+  </div>
+  </div>
+<!-- ↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕ -->
+
+
+
+
+
+
+
+
+
+<!-- ↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕ -->
+  <div class="mb-5 row">
+  <label for="inputPassword" class="col-sm-2 col-form-label"><small>Yashash shahri</small></label>
+  <div class="col-sm-4">
+    
+  <div class="input-group mb-3">
+  <input type="text" class="form-control rounded-0" placeholder="Tanlang" aria-label="Username" aria-describedby="basic-addon1">
+  <span class="input-group-text rounded-0" id="basic-addon1" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-bars"></i></span>
+  </div>
+
+  </div>
+  </div>
+
+  <!-- modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+  <div class="modal-content rounded-0">
+  <div class="modal-header">
+  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+  </div>
+  <div class="modal-body">
+
+  <div class="mb-4 row">
+  <label for="inputPassword" class="col-sm-2 col-form-label"><small>Viloyatlar</small></label>
+  <div class="col-sm-12">
+  {{form.provinces}}
+  </div>
+  </div>
+
+  <div class="mb-4 row">
+  <label for="inputPassword" class="col-sm-2 col-form-label"><small>Tumanlar</small></label>
+  <div class="col-sm-12">
+   {{form.region}}
+  </div>
+  </div>
+  
+  </div>
+  <div class="modal-footer">
+  <button type="button" class="btn btn-secondary rounded-0" data-bs-dismiss="modal">Bekor qilish</button>
+  <button type="button" class="btn btn-primary rounded-0" data-bs-dismiss="modal">Saqlash</button>
+  </div>
+  </div>
+  </div>
+  </div>
+  <!-- modal -->
+<!-- ↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕ -->
+
+
+
+
+
+
+
+
+
+  <h6 class="mb-4">Asosiy ma'lumotlar</h6>
+  
+
+<!-- ↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕ -->
+ <div class="mb-3 row">
+  <label for="inputPassword" class="col-sm-2 col-form-label"><small>Tug'ilgan kun</small></label>
+  <div class="col-sm-4">
+  {{form.data_time}}
+  </div>
+  </div>
+<!-- ↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕ -->
+
+
+
+
+<!-- ↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕ -->
+  <div class="mb-3 row">
+  <label for="inputPassword" class="col-sm-2 col-form-label"><small>Jins</small></label>
+  <div class="col-sm-4">
+  {{form.sex}}
+  </div>
+  </div>
+<!-- ↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕ -->
+
+
+
+
+
+
+<!-- ↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕ -->
+  <div class="mb-5 row">
+  <label for="inputPassword" class="col-sm-2 col-form-label"><small>Fuqorolik</small></label>
+  <div class="col-sm-4">
+    
+  <div class="input-group mb-3">
+  <input type="text" class="form-control rounded-0" placeholder="Tanlang" aria-label="Username" aria-describedby="basic-addon1">
+  <span class="input-group-text rounded-0" id="basic-addon1" data-bs-toggle="modal" data-bs-target="#exampleModal2"><i class="fas fa-bars"></i></span>
+  </div>
+
+  </div>
+  </div>
+
+
+  <!-- modal -->
+  <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+  <div class="modal-content rounded-0">
+  <div class="modal-header">
+  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+  </div>
+  <div class="modal-body">
+  
+  <div class="overflow-auto" style="height: 400px;">
+  <div class="row">
+  {{form.citizenship}}
+  </div>
+  </div>
+  
+  </div>
+  <div class="modal-footer">
+  <button type="button" class="btn btn-secondary rounded-0" data-bs-dismiss="modal">Bekor qilish</button>
+  <button type="button" class="btn btn-primary rounded-0" data-bs-dismiss="modal">Saqlash</button>
+  </div>
+  </div>
+  </div>
+  </div>
+  <!-- modal -->
+<!-- ↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕ -->
+
+
+
+
+
+<!-- ↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕ -->
+  <div class="mb-3 row">
+  <label for="inputPassword" class="col-sm-2 col-form-label"><small>Ish tajribasi</small></label>
+  <div class="col-sm-4">
+  {{form.workexper}}
+  </div>
+  </div>
+<!-- ↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕ -->
+
+
+
+
+
+
+
+
+
+
+
+<h6 class="mb-4">Mutaxassislik</h6>
+
+
+<!-- ↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕ -->
+  <div class="mb-3 row">
+  <label for="inputPassword" class="col-sm-2 col-form-label"><small>Ish haqi</small></label>
+  <div class="col-sm-3">
+  {{form.thesalary}}
+  </div>
+  <div class="col-sm-1">
+  {{form.moneys}}
+  </div>
+  </div>
+<!-- ↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕ -->
+
+
+
+
+
+
+
+
+<!-- ↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕ -->
+<div class="collapse" id="collapseExample7">
+  
+  <div class="mb-5 row">
+  <label for="inputPassword" class="col-sm-2 col-form-label"><small>Professional yo'nalish</small></label>
+  <div class="col-sm-4">
+    
+  <div class="input-group mb-3">
+  <input type="text" class="form-control rounded-0" placeholder="Tanlang" aria-label="Username" aria-describedby="basic-addon1">
+  <span class="input-group-text rounded-0" id="basic-addon1" data-bs-toggle="modal" data-bs-target="#exampleModal6"><i class="fas fa-bars"></i></span>
+  </div>
+
+  </div>
+  </div>
+
+</div>
+  <!-- modal -->
+  <div class="modal fade" id="exampleModal6" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+  <div class="modal-content rounded-0">
+  <div class="modal-header">
+  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+  </div>
+  <div class="modal-body">
+
+  <div class="mb-4 row">
+  <label for="inputPassword" class="col-lg-12 col-form-label"><small>Mutaxasislik bo'limlar</small></label>
+  <div class="col-sm-12">
+  {{form.profess}}
+  </div>
+  </div>
+
+  <div class="mb-4 row">
+  <label for="inputPassword" class="col-lg-12 col-form-label"><small>Mutaxasisliklar</small></label>
+  <div class="col-sm-12">
+   {{form.thchopr}}
+  </div>
+  </div>
+  
+  </div>
+  <div class="modal-footer">
+  <button type="button" class="btn btn-secondary rounded-0" data-bs-dismiss="modal">Bekor qilish</button>
+  <button type="button" class="btn btn-primary rounded-0" data-bs-dismiss="modal">Saqlash</button>
+  </div>
+  </div>
+  </div>
+  </div>
+  <!-- modal -->
+<!-- ↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕ -->
+
+
+
+
+
+
+
+
+
+
+
+<!-- ↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕ -->
+<div class="collapse" id="collapseExample">
+
+  <div class="mb-5 row tajriba" id="tajribabor">
+  <label for="inputPassword" class="col-sm-2 col-form-label"><small>Ish joylari</small></label>
+  <div class="col-sm-4">
+    
+  <div class="input-group mb-3">
+  <input type="text" class="form-control rounded-0" placeholder="Tanlang" aria-label="Username" aria-describedby="basic-addon1">
+  <span class="input-group-text rounded-0" id="basic-addon1" data-bs-toggle="modal" data-bs-target="#exampleModal3"><i class="fas fa-bars"></i></span>
+  </div>
+
+  </div>
+  </div>
+
+</div>
+
+  <!-- modal -->
+  <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+  <div class="modal-content rounded-0">
+  <div class="modal-header">
+  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+  </div>
+  <div class="modal-body">
+  
+  <table class="">
+  <thead>
+  <tr></tr>
+  </thead>
+  <tbody>
+  {% for form_data in formset %}
+  
+  <div class="item">
+
+  <div class="row">
+    <div class="col">
+      <label for="inputEmail4">Ishning boshlanishi</label>
+      {{ form_data.begwork }}
+    </div>
+    <div class="col">
+      <label for="inputEmail4">Tugatish</label>
+      {{ form_data.finishw }}
+    </div>
+
+    <div class="col">
+      <label for="inputEmail4">Tashkilot</label>
+      {{ form_data.organiza }}
+    </div>
+
+    <div class="col">
+      <label for="inputEmail4">Lavozim</label>
+      {{ form_data.position }}
+    </div>
+  </div>
+
+    <div class="form-floating">
+    {{ form_data.workplaceres }}
+    <label for="floatingTextarea2">Ish joyidagi vazifalar: Aynan nima bilan shug'illangansiz qisqacha yozing</label>
+    </div>
+
+
+    <div>
+    <button type="button" class="btn btn-danger btn-sm remove-form-row rounded-0" id="{{ formset.prefix }}">Oxirgi jadvalni o'shirish</button>
+    </div>
+  </div>
+
+  {% endfor %}
+  <tr>
+  <td colspan="9"
+  style="border-left: none!important; border-right: none !important; border-bottom: none!important;">
+  
+  <button type="button" class="btn btn-sm btn-success add-form-row  rounded-0" id="{{ formset.prefix }}">Yangi jadval qo'shish
+  </button>
+
+  </td>
+  </tr>
+  </tbody>
+  </table>
+  {{ formset.management_form }}
+  
+  </div>
+  <div class="modal-footer">
+  <button type="button" class="btn btn-secondary rounded-0" data-bs-dismiss="modal">Bekor qilish</button>
+  <button type="button" class="btn btn-primary rounded-0" data-bs-dismiss="modal">Saqlash</button>
+  </div>
+  </div>
+  </div>
+  </div>
+  <!-- modal -->
+<!-- ↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕ -->
+
+
+
+
+
+
+<!-- ↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕ -->
+<div class="collapse" id="collapseExample2">
+  <div class="mb-5 row tajriba" id="tajribabor">
+  <label for="inputPassword" class="col-sm-2 col-form-label"><small>Mutaxasislik</small></label>
+  <div class="col-sm-4">
+    
+  <div class="input-group mb-3">
+    <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal4">Mutaxassislikni ko'rsating</a>
+  </div>
+
+  </div>
+  </div>
+</div>
+
+
+ <!-- modal -->
+  <div class="modal fade" id="exampleModal4" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+  <div class="modal-content rounded-0">
+  <div class="modal-header">
+  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+  </div>
+  <div class="modal-body">
+  
+  <div class="mb-3 row">
+  <div class="col-sm-12">
+  {{form.speciali}}
+  </div>
+  </div>
+
+  
+  </div>
+  <div class="modal-footer">
+  <button type="button" class="btn btn-secondary rounded-0" data-bs-dismiss="modal">Bekor qilish</button>
+  <button type="button" class="btn btn-primary rounded-0" data-bs-dismiss="modal">Saqlash</button>
+  </div>
+  </div>
+  </div>
+  </div>
+  <!-- modal -->
+<!-- ↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕↕ -->
+
+
+
+
+
+
+
+
+
+   <script type="text/javascript">
+      document.getElementById("id_workexper_0").onchange = function () {
+      if (this.value == "Ish tajribasi bor"){
+        // document.getElementById("tajribabor").style.display="block";
+        // $('#tajribabor').toggleClass("tajriba")      
+        $("#collapseExample").collapse('show');
+        $("#collapseExample7").collapse('show');
+        $("#collapseExample2").collapse('hide');
+      }
+      };
+      document.getElementById("id_workexper_1").onchange = function () {
+      if (this.value == "Ish tajribasi yo'q"){
+      // document.getElementById("tajribabor").style.display="none";
+        $("#collapseExample").collapse('hide');
+        $("#collapseExample7").collapse('hide');
+        $("#collapseExample2").collapse('show');   
+      }
+      };
+
+
+
+    </script>
+
+
+  <button type="submit" class="btn btn-primary rounded-0 mb-5">Tasdiqlash</button>
+  </div>
+  </form>
+
+  </div>
+  </div>
+</div>
+
+{% endblock %}
+
+
+{% block javascript %}
+<script type="text/javascript" src="{% static 'js/formset.js' %}"></script>
+{% endblock %}

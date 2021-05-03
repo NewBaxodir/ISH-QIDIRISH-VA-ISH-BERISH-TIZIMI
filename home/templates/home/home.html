@@ -1,0 +1,157 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+<title>Bosh sahifa</title> 
+{% endblock %}
+
+
+{% block content %}
+<style type="text/css">
+
+#background_image{
+
+background-image: url('{% static 'image/jobs.jpg' %}');
+background-repeat: no-repeat; 
+background-position: center center;
+/*background-size: 100% 100%;*/
+padding-left: 0px;
+padding-right: 0px;
+}
+main{
+background-color: rgba(0,0,0,0.3);
+}
+
+
+@media screen and (max-width: 767px){
+
+#background_image{
+background-image: url('{% static 'image/jobs.jpg' %}');
+background-size: 100%;
+background-repeat: no-repeat;
+background-position: center center; 
+}
+
+main{
+background-color: rgba(0,0,0,0.4);
+}
+
+
+}
+</style>
+<!-- ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ -->
+<div id="background_image" class="container-fluid">
+<!-- ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ -->
+
+<!-- main -->
+<main>
+<form id="myForm" action="{% url 'search_jobs' %}"  type="GET">
+  <section class="py-5 text-center container">
+  <div class="row py-lg-5">
+  <div class="col-lg-9 col-md-8 mx-auto">
+  <h3 class="fw-light mb-3 text-white" align="left">Работа найдется для каждого</h3>
+  <div class="input-group mb-3">
+              
+  <input id="myinput" type="search" name="job_title" class="form-control col-md-8" placeholder="Профессия, должность или компания" aria-label="Recipient's username" aria-describedby="button-addon2" style="height: 50px;">
+  
+  <select class="custom-select col-12 col-lg-2" id="select_id" required style="height: 50px;">
+  <option value="1">вакансий</option>
+  <option value="2">резюме</option>
+  </select>
+
+  <button type="submit" class="btn btn btn-primary button_style">Найти</button>
+  </div>
+  
+  </div>
+  </div>  
+  </section>
+</form>
+
+
+    <script type="text/javascript">
+      document.getElementById("select_id").onchange = function(){
+      if (this.value == "1"){
+        // $('#baxodir1').toggleClass("");
+        document.getElementById("myForm").action = "{% url 'search_jobs' %}";
+      }else if (this.value == "2") {
+        document.getElementById("myForm").action = "{% url 'search_summys' %}";
+        document.getElementById("myinput").name = "carobjec";
+        // $('#baxodir2').toggleClass("");
+      }
+
+      };
+
+
+    </script>
+
+<section style="margin-top: 100px; color: white;">
+	<div class="row">
+	<div class="col-lg-4 mx-auto">
+	
+	<div class="container">
+  	  <div class="row">
+    <div class="col-sm">
+     
+    <div class="card-body">
+    <h5 class="card-title">{{summs}}</h5>
+    <span><small>резюме</small></span>
+  	</div>
+
+    </div>
+    <div class="col-sm">
+      
+    <div class="card-body">
+    <h5 class="card-title">{{jobs}}</h5>
+    <span><small>вакансий</small></span>
+  	</div>
+
+
+    </div>
+    <div class="col-sm">
+      
+ <!--    <div class="card-body">
+    <h5 class="card-title">200000</h5>
+    <span><small>Kompaniyalar</small></span>
+  	</div> -->
+
+    </div>
+  </div>
+  </div>
+
+
+	</div>
+	<div class="col-lg-4 mx-auto">
+	
+  <div class="card-body">
+  <section class="mb-4">
+  <a class="btn btn-outline-light btn-floating m-1" href="#" role="button"><i class="fab fa-google-play" style="font-size: 20px;"></i> Google Play</a>
+
+  <a class="btn btn-outline-light btn-floating m-1" href="#" role="button"
+  ><i class="fab fa-apple" style="font-size: 20px;"></i> App Store</a>
+  </section>
+  </div>
+
+	</div>
+	</div>
+</section>
+</main>
+<!-- main -->
+
+<!-- ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ -->
+</div>
+<!-- ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ -->
+
+
+<script>
+var form = document.querySelector("form");
+form.addEventListener("submit", function (e) {
+  e.preventDefault();
+  var job_title = form.querySelector("input[type=search]");
+  job_title.value = "" + job_title.value;
+  form.submit();
+});
+
+</script>
+
+
+{% endblock %}
